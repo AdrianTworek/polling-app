@@ -59,6 +59,7 @@ export class AuthService {
       .catch((error) => {
         console.error(error);
         this.currentUserSig.set(null);
+        return Promise.reject(error);
       });
   }
 
