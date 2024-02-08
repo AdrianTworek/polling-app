@@ -1,21 +1,36 @@
-import { Component, inject } from '@angular/core';
-import { ButtonModule } from 'primeng/button';
-import { AuthService } from './auth.service';
-import { MessageService } from 'primeng/api';
+import { Component, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AuthService } from './auth.service';
+
+import { MessageService } from 'primeng/api';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { PasswordModule } from 'primeng/password';
 
 @Component({
   selector: 'app-auth',
   standalone: true,
-  imports: [ButtonModule],
+  imports: [ReactiveFormsModule, ButtonModule, InputTextModule, PasswordModule],
   templateUrl: './auth.component.html',
 })
 export class AuthComponent {
   private authService = inject(AuthService);
   private messageService = inject(MessageService);
   private router = inject(Router);
+  private fb = inject(FormBuilder);
 
-  private signUpWithProviderHandler(promise: Promise<void>) {
+  isRegisterModeSig = signal(false);
+
+  authForm = this.fb.group({
+    email: ['', [Validators.required, Validators.email]],
+    password: [
+      '',
+      [Validators.required, Validators.minLength(6), Validators.max(32)],
+    ],
+  });
+
+  private authResultHandler(promise: Promise<any>) {
     promise
       .then(() => {
         this.messageService.add({
@@ -24,20 +39,46 @@ export class AuthComponent {
         });
         this.router.navigate(['/dashboard']);
       })
-      .catch(() => {
+      .catch((error) => {
+        this.authForm.reset();
         this.messageService.add({
           severity: 'error',
           summary: 'Something went wrong',
-          detail: 'Please try again',
+          detail: error,
         });
       });
   }
 
   onSignUpWithGoogle() {
-    this.signUpWithProviderHandler(this.authService.signUpWithGoogle());
+    this.authResultHandler(this.authService.signUpWithGoogle());
   }
 
   onSignUpWithGitHub() {
-    this.signUpWithProviderHandler(this.authService.signUpWithGithub());
+    this.authResultHandler(this.authService.signUpWithGithub());
+  }
+
+  onSubmit() {
+    if (this.authForm.valid) {
+      if (this.isRegisterModeSig()) {
+        this.authResultHandler(
+          this.authService.registerWithEmailAndPassword(
+            this.authForm.value.email!,
+            this.authForm.value.password!
+          )
+        );
+      } else {
+        this.authResultHandler(
+          this.authService.loginWithEmailAndPassword(
+            this.authForm.value.email!,
+            this.authForm.value.password!
+          )
+        );
+      }
+    }
+  }
+
+  onToggleFormMode() {
+    this.isRegisterModeSig.set(!this.isRegisterModeSig());
+    this.authForm.reset();
   }
 }

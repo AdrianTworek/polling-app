@@ -5,7 +5,10 @@ import {
   GithubAuthProvider,
   GoogleAuthProvider,
   User,
+  UserCredential,
+  createUserWithEmailAndPassword,
   onAuthStateChanged,
+  signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
 } from '@angular/fire/auth';
@@ -39,32 +42,31 @@ export class AuthService {
     providerName: string
   ) {
     return signInWithPopup(this.auth, provider)
-      .then(async (result) => {
-        const user = result.user;
-
-        this.currentUserSig.set(user);
-
-        const q = query(
-          collection(this.db, 'users'),
-          where('uid', '==', user.uid)
-        );
-        const docs = await getDocs(q);
-
-        if (docs.docs.length === 0) {
-          await addDoc(collection(this.db, 'users'), {
-            uid: user.uid,
-            name: user.displayName,
-            authProvider: providerName,
-            email: user.email,
-            photoUrl: user.photoURL,
-          });
-        }
-      })
+      .then((result) => this.storeUserInDatabaseHandler(result, providerName))
       .catch((error) => {
         console.error(error);
-        this.currentUserSig.set(null);
         return Promise.reject(error);
       });
+  }
+
+  private async storeUserInDatabaseHandler(
+    result: UserCredential,
+    providerName: string
+  ) {
+    const user = result.user;
+
+    const q = query(collection(this.db, 'users'), where('uid', '==', user.uid));
+    const docs = await getDocs(q);
+
+    if (docs.docs.length === 0) {
+      await addDoc(collection(this.db, 'users'), {
+        uid: user.uid,
+        name: user.displayName,
+        authProvider: providerName,
+        email: user.email,
+        photoUrl: user.photoURL,
+      });
+    }
   }
 
   async signUpWithGoogle() {
@@ -75,6 +77,24 @@ export class AuthService {
   async signUpWithGithub() {
     const githubProvider = new GithubAuthProvider();
     return this.signUpWithProvider(githubProvider, 'github');
+  }
+
+  async registerWithEmailAndPassword(email: string, password: string) {
+    return createUserWithEmailAndPassword(this.auth, email, password)
+      .then((result) => this.storeUserInDatabaseHandler(result, 'email'))
+      .catch((error) => {
+        console.error(error);
+        return Promise.reject(error);
+      });
+  }
+
+  async loginWithEmailAndPassword(email: string, password: string) {
+    return signInWithEmailAndPassword(this.auth, email, password)
+      .then((result) => Promise.resolve(result))
+      .catch((error) => {
+        console.error(error);
+        return Promise.reject(error);
+      });
   }
 
   logOut() {
