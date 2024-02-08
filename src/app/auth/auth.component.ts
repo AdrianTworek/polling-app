@@ -15,9 +15,8 @@ export class AuthComponent {
   private messageService = inject(MessageService);
   private router = inject(Router);
 
-  onSignUpWithGoogle() {
-    this.authService
-      .signUpWithGoogle()
+  private signUpWithProviderHandler(promise: Promise<void>) {
+    promise
       .then(() => {
         this.messageService.add({
           severity: 'success',
@@ -32,5 +31,13 @@ export class AuthComponent {
           detail: 'Please try again',
         });
       });
+  }
+
+  onSignUpWithGoogle() {
+    this.signUpWithProviderHandler(this.authService.signUpWithGoogle());
+  }
+
+  onSignUpWithGitHub() {
+    this.signUpWithProviderHandler(this.authService.signUpWithGithub());
   }
 }

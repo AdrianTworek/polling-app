@@ -1,6 +1,8 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
 import {
   Auth,
+  AuthProvider,
+  GithubAuthProvider,
   GoogleAuthProvider,
   User,
   onAuthStateChanged,
@@ -32,9 +34,10 @@ export class AuthService {
     });
   }
 
-  async signUpWithGoogle() {
-    const provider = new GoogleAuthProvider();
-
+  private async signUpWithProvider(
+    provider: AuthProvider,
+    providerName: string
+  ) {
     return signInWithPopup(this.auth, provider)
       .then(async (result) => {
         const user = result.user;
@@ -51,8 +54,9 @@ export class AuthService {
           await addDoc(collection(this.db, 'users'), {
             uid: user.uid,
             name: user.displayName,
-            authProvider: 'google',
+            authProvider: providerName,
             email: user.email,
+            photoUrl: user.photoURL,
           });
         }
       })
@@ -61,6 +65,16 @@ export class AuthService {
         this.currentUserSig.set(null);
         return Promise.reject(error);
       });
+  }
+
+  async signUpWithGoogle() {
+    const googleProvider = new GoogleAuthProvider();
+    return this.signUpWithProvider(googleProvider, 'google');
+  }
+
+  async signUpWithGithub() {
+    const githubProvider = new GithubAuthProvider();
+    return this.signUpWithProvider(githubProvider, 'github');
   }
 
   logOut() {
