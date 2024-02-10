@@ -41,13 +41,15 @@
           <input type="text" id="email" pInputText formControlName="email" />
           <label for="email">Email Address</label>
         </span>
-        <small
-          *ngIf="email.invalid && (email.dirty || email.touched)"
-          class="block p-error"
-        >
-          <div *ngIf="email.errors?.['required']">Email is required.</div>
-          <div *ngIf="email.errors?.['email']">Email must be valid.</div>
+        @if (email.invalid && (email.dirty || email.touched)) {
+        <small class="block p-error">
+          @if (email.errors?.['required']) {
+          <div>Email is required.</div>
+          } @if (email.errors?.['email']) {
+          <div>Email must be valid.</div>
+          }
         </small>
+        }
       </div>
 
       <div class="flex flex-column gap-1">
@@ -59,18 +61,17 @@
           ></p-password>
           <label for="password">Password</label>
         </span>
-        <small
-          *ngIf="password.invalid && (password.dirty || password.touched)"
-          class="block p-error"
-        >
-          <div *ngIf="password.errors?.['required']">Password is required.</div>
-          <div *ngIf="password.errors?.['minlength']">
-            Password must contain at least 6 characters.
-          </div>
-          <div *ngIf="password.errors?.['maxlength']">
-            Password must not exceed 32 characters.
-          </div>
+        @if (password.invalid && (password.dirty || password.touched)) {
+        <small class="block p-error">
+          @if (password.errors?.['required']) {
+          <div>Password is required.</div>
+          } @if (password.errors?.['minlength']) {
+          <div>Password must contain at least 6 characters.</div>
+          } @if (password.errors?.['maxlength']) {
+          <div>Password must not exceed 32 characters.</div>
+          }
         </small>
+        }
       </div>
 
       <p-button

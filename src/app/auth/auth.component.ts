@@ -7,18 +7,11 @@ import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-auth',
   standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    ButtonModule,
-    InputTextModule,
-    PasswordModule,
-  ],
+  imports: [ReactiveFormsModule, ButtonModule, InputTextModule, PasswordModule],
   templateUrl: './auth.component.html',
 })
 export class AuthComponent {
