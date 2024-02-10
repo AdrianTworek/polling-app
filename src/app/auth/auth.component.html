@@ -1,10 +1,96 @@
-<p-button
-  label="Sign Up with Google"
-  icon="pi pi-google"
-  (click)="onSignUpWithGoogle()"
-></p-button>
-<p-button
-  label="Sign Up with GitHub"
-  icon="pi pi-github"
-  (click)="onSignUpWithGitHub()"
-></p-button>
+<div
+  class="max-w-22rem flex flex-column align-items-center p-5 mx-auto mt-6 border-1 border-black-alpha-10 border-round-md shadow-2"
+>
+  <div class="flex flex-column align-items-center gap-2">
+    <h2 class="m-0 mb-2 text-700 font-medium">Continue with</h2>
+    <div class="flex flex-row gap-2">
+      <p-button
+        label="Google"
+        severity="secondary"
+        icon="pi pi-google"
+        (click)="onSignUpWithGoogle()"
+      ></p-button>
+      <p-button
+        styleClass="w-full"
+        label="GitHub"
+        severity="secondary"
+        icon="pi pi-github"
+        (click)="onSignUpWithGitHub()"
+      ></p-button>
+    </div>
+  </div>
+
+  <div>
+    <div class="flex align-items-center justify-content-center mt-3">
+      <div class="w-full bg-gray-500" [style]="{ height: '1px' }"></div>
+      <span class="px-2 text-700">or</span>
+      <div class="w-full bg-gray-500" [style]="{ height: '1px' }"></div>
+    </div>
+
+    <h2 class="m-0 my-5 text-center text-700 font-medium">
+      {{ isRegisterModeSig() ? "Sign Up" : "Sign In" }}
+    </h2>
+    <form
+      class="flex flex-column gap-5"
+      [formGroup]="authForm"
+      (submit)="onSubmit()"
+    >
+      <div class="flex flex-column gap-1">
+        <span class="p-input-icon-left p-float-label">
+          <i class="pi pi-envelope"></i>
+          <input type="text" id="email" pInputText formControlName="email" />
+          <label for="email">Email Address</label>
+        </span>
+        <small
+          *ngIf="email.invalid && (email.dirty || email.touched)"
+          class="block p-error"
+        >
+          <div *ngIf="email.errors?.['required']">Email is required.</div>
+          <div *ngIf="email.errors?.['email']">Email must be valid.</div>
+        </small>
+      </div>
+
+      <div class="flex flex-column gap-1">
+        <span class="p-float-label">
+          <p-password
+            [feedback]="false"
+            [toggleMask]="true"
+            formControlName="password"
+          ></p-password>
+          <label for="password">Password</label>
+        </span>
+        <small
+          *ngIf="password.invalid && (password.dirty || password.touched)"
+          class="block p-error"
+        >
+          <div *ngIf="password.errors?.['required']">Password is required.</div>
+          <div *ngIf="password.errors?.['minlength']">
+            Password must contain at least 6 characters.
+          </div>
+          <div *ngIf="password.errors?.['maxlength']">
+            Password must not exceed 32 characters.
+          </div>
+        </small>
+      </div>
+
+      <p-button
+        styleClass="w-full"
+        type="submit"
+        [label]="isRegisterModeSig() ? 'Register' : 'Login'"
+        [disabled]="authForm.invalid"
+        [loading]="isLoading()"
+      ></p-button>
+    </form>
+
+    <div class="flex gap-1">
+      <p>
+        {{
+          isRegisterModeSig() ? "Already registered?" : "Don't have an account?"
+        }}
+      </p>
+      <p class="font-bold cursor-pointer" (click)="onToggleFormMode()">
+        {{ isRegisterModeSig() ? "Login" : "Register" }}
+      </p>
+    </div>
+  </div>
+</div>

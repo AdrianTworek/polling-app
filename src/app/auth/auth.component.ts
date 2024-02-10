@@ -7,11 +7,18 @@ import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-auth',
   standalone: true,
-  imports: [ReactiveFormsModule, ButtonModule, InputTextModule, PasswordModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    ButtonModule,
+    InputTextModule,
+    PasswordModule,
+  ],
   templateUrl: './auth.component.html',
 })
 export class AuthComponent {
@@ -21,14 +28,23 @@ export class AuthComponent {
   private fb = inject(FormBuilder);
 
   isRegisterModeSig = signal(false);
+  isLoading = signal(false);
 
   authForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: [
       '',
-      [Validators.required, Validators.minLength(6), Validators.max(32)],
+      [Validators.required, Validators.minLength(6), Validators.maxLength(32)],
     ],
   });
+
+  get email() {
+    return this.authForm.controls.email;
+  }
+
+  get password() {
+    return this.authForm.controls.password;
+  }
 
   private authResultHandler(promise: Promise<any>) {
     promise
@@ -46,6 +62,9 @@ export class AuthComponent {
           summary: 'Something went wrong',
           detail: error,
         });
+      })
+      .finally(() => {
+        this.isLoading.set(false);
       });
   }
 
@@ -59,6 +78,8 @@ export class AuthComponent {
 
   onSubmit() {
     if (this.authForm.valid) {
+      this.isLoading.set(true);
+
       if (this.isRegisterModeSig()) {
         this.authResultHandler(
           this.authService.registerWithEmailAndPassword(
