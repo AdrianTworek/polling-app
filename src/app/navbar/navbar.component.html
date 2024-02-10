@@ -1,32 +1,24 @@
-<nav>
-  <div
-    [style]="{
-      display: 'flex',
-      width: '100%',
-      'background-color': 'var(--highlight-bg)',
-      'flex-direction': 'row',
-      'justify-content': 'space-between',
-      'align-items': 'center',
-      gap: '2rem',
-      padding: '0 2rem'
-    }"
-  >
-    <a routerLink="/" [style]="{ 'text-decoration': 'none' }">
-      <h1 [style]="{ color: 'var(--primary-color)' }">Polling App</h1>
-    </a>
+<nav
+  class="w-full flex align-items-center justify-content-between px-5"
+  [style]="{
+    'background-color': 'var(--highlight-bg)',
+  }"
+>
+  <a routerLink="/" class="no-underline">
+    <h1 [style]="{ color: 'var(--primary-color)' }">Polling App</h1>
+  </a>
 
-    @if (authService.isAuthenticated()) {
-    <div>
-      <p-menu #menu [model]="items" [popup]="true"></p-menu>
-      <p-button
-        icon="pi pi-user"
-        [rounded]="true"
-        severity="info"
-        (click)="menu.toggle($event)"
-      ></p-button>
-    </div>
-    } @else {
-    <p-button label="Sign Up" routerLink="/auth"></p-button>
-    }
+  @if (authService.isAuthenticated()) {
+  <div>
+    <p-menu #menu [model]="items" [popup]="true"></p-menu>
+    <p-button
+      icon="pi pi-user"
+      [rounded]="true"
+      severity="info"
+      (click)="menu.toggle($event)"
+    ></p-button>
   </div>
+  } @else {
+  <p-button label="Get Started" routerLink="/auth"></p-button>
+  }
 </nav>

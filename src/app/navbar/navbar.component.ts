@@ -16,8 +16,8 @@ import { Router } from '@angular/router';
 export class NavbarComponent implements OnInit {
   items: MenuItem[] | undefined;
   authService = inject(AuthService);
-  messageService = inject(MessageService);
-  router = inject(Router);
+  private messageService = inject(MessageService);
+  private router = inject(Router);
 
   ngOnInit() {
     this.items = [
