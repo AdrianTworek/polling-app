@@ -1,0 +1,37 @@
+<form
+  [formGroup]="usernameForm"
+  (submit)="onSubmit()"
+  class="flex flex-column md:flex-row justify-content-between gap-3"
+>
+  <div class="flex flex-column gap-1 w-full">
+    <span class="p-float-label">
+      <input
+        class="w-full"
+        type="text"
+        id="username"
+        pInputText
+        formControlName="username"
+      />
+      <label for="username">Username</label>
+    </span>
+    @if (username.invalid && (username.dirty || username.touched)) {
+    <small class="block p-error">
+      @if (username.errors?.['required']) {
+      <div>Username is required.</div>
+      }
+    </small>
+    }
+  </div>
+
+  <p-button
+    styleClass="w-full"
+    icon="pi pi-pencil"
+    type="submit"
+    label="Save"
+    [disabled]="
+      usernameForm.invalid ||
+      authService.currentUserSig()?.displayName === username.getRawValue()
+    "
+    [loading]="isLoading()"
+  ></p-button>
+</form>

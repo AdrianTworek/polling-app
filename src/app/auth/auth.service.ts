@@ -1,4 +1,5 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
+import { Observable, from } from 'rxjs';
 import {
   Auth,
   AuthProvider,
@@ -11,6 +12,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updateProfile,
 } from '@angular/fire/auth';
 import {
   Firestore,
@@ -99,5 +101,12 @@ export class AuthService {
 
   logOut() {
     return signOut(this.auth);
+  }
+
+  updateUsername(username: string): Observable<any> {
+    const promise = updateProfile(this.auth.currentUser!, {
+      displayName: username,
+    });
+    return from(promise);
   }
 }
