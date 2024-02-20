@@ -1,11 +1,11 @@
 import { Component, OnInit, inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../auth/auth.service';
 
 import { MenuItem, MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { MenuModule } from 'primeng/menu';
 import { AvatarModule } from 'primeng/avatar';
-import { AuthService } from '../auth/auth.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -27,13 +27,18 @@ export class NavbarComponent implements OnInit {
           {
             label: 'Polls',
             icon: 'pi pi-chart-bar',
-            routerLink: '/dashboard',
+            routerLink: '/dashboard/polls',
           },
         ],
       },
       {
         label: 'Account',
         items: [
+          {
+            label: 'Settings',
+            icon: 'pi pi-wrench',
+            routerLink: '/dashboard/profile',
+          },
           {
             label: 'Log out',
             icon: 'pi pi-sign-out',
