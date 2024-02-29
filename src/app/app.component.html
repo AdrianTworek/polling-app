@@ -1,5 +1,8 @@
 <p-toast></p-toast>
-<app-navbar></app-navbar>
-<main class="w-full h-full flex flex-column px-4">
-  <router-outlet></router-outlet>
-</main>
+<div class="flex flex-column justify-content-between min-h-screen">
+  <app-navbar></app-navbar>
+  <main class="w-full flex flex-column px-4 mb-auto">
+    <router-outlet></router-outlet>
+  </main>
+  <app-footer></app-footer>
+</div>
