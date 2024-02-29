@@ -13,6 +13,7 @@ import {
   signInWithPopup,
   signOut,
   updateProfile,
+  deleteUser,
 } from '@angular/fire/auth';
 import {
   Firestore,
@@ -107,6 +108,11 @@ export class AuthService {
     const promise = updateProfile(this.auth.currentUser!, {
       displayName: username,
     });
+    return from(promise);
+  }
+
+  deleteAccount(): Observable<any> {
+    const promise = deleteUser(this.auth.currentUser!);
     return from(promise);
   }
 }
