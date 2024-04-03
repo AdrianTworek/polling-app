@@ -9,13 +9,13 @@
   header="Choose poll type"
   [(visible)]="visible"
   [modal]="true"
-  [style]="{ width: '50vw', maxWidth: '25rem' }"
+  [style]="{ width: '50vw', maxWidth: '30rem' }"
   [draggable]="false"
   [resizable]="false"
 >
-  <div class="flex align-items-center justify-content-around gap-3">
+  <div class="grid gap-3 align-items-center justify-content-center">
     <div
-      class="flex p-4 flex-column align-items-center text-center border-1 custom-card"
+      class="col-10 md:col-5 flex md:p-4 mt-4 flex-column align-items-center text-center border-1 custom-card"
     >
       <h3 class="m-0 flex flex-row gap-2 align-items-center">
         <i class="pi pi-lock"></i>Anonymous
@@ -23,7 +23,7 @@
       <h5>Only you can see results</h5>
     </div>
     <div
-      class="flex p-4 flex-column align-items-center text-center border-1 custom-card"
+      class="col-10 md:col-5 flex md:p-4 mt-4 flex-column align-items-center text-center border-1 custom-card"
     >
       <h3 class="m-0 flex flex-row gap-2 align-items-center">
         <i class="pi pi-users"></i>Public
