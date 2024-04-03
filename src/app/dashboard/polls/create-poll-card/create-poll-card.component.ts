@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { PollType } from '../../../shared/types';
 
 import { CardModule } from 'primeng/card';
 import { DialogModule } from 'primeng/dialog';
@@ -11,8 +13,17 @@ import { DialogModule } from 'primeng/dialog';
 })
 export class CreatePollCardComponent {
   visible = false;
+  pollType = PollType;
+
+  private router = inject(Router);
 
   showDialog() {
     this.visible = true;
+  }
+
+  onRedirectToPollCreator(pollType: PollType) {
+    this.router.navigate(['dashboard/polls/new'], {
+      queryParams: { type: pollType },
+    });
   }
 }
