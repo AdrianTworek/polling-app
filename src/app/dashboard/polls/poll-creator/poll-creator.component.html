@@ -1,1 +1,14 @@
-<p>poll-creator works!</p>
+@if (pollTypeSig() === pollType.Anonymous) {
+<p>Anonymous</p>
+} @else if (pollTypeSig() === pollType.Public) {
+<p>Public</p>
+} @else {
+<div class="flex align-items-center justify-content-center flex-column gap-2">
+  <i
+    class="pi pi-exclamation-triangle"
+    style="font-size: 2rem; color: orange"
+  ></i>
+  <p>This poll type does not exist</p>
+  <p-button (click)="onGoBack()" label="Go Back"></p-button>
+</div>
+}
