@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, DestroyRef, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../auth/auth.service';
 
@@ -19,6 +19,7 @@ export class DeleteProfileComponent {
   private messageService = inject(MessageService);
   private authService = inject(AuthService);
   private router = inject(Router);
+  private destroyRef = inject(DestroyRef);
 
   confirm(event: Event) {
     this.confirmationService.confirm({
@@ -28,7 +29,7 @@ export class DeleteProfileComponent {
       icon: 'pi pi-exclamation-triangle',
       rejectButtonStyleClass: 'p-button-text',
       accept: () => {
-        this.authService.deleteAccount().subscribe({
+        const subscription = this.authService.deleteAccount().subscribe({
           next: () => {
             this.authService.logOut().then(() => {
               this.messageService.add({
@@ -50,6 +51,8 @@ export class DeleteProfileComponent {
             });
           },
         });
+
+        this.destroyRef.onDestroy(() => subscription.unsubscribe());
       },
       reject: () => {
         this.messageService.add({

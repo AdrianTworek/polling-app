@@ -1,16 +1,15 @@
 <div class="flex gap-3">
-  @if (authService.currentUserSig()?.photoURL &&
-  authService.currentUserSig()?.displayName) {
+  @if (currentUser()?.photoURL && currentUser()?.displayName) {
   <p-avatar
-    [image]="authService.currentUserSig()?.photoURL!"
+    [image]="currentUser()?.photoURL!"
     size="xlarge"
     shape="circle"
     alt="user avatar"
   />
   <h2 class="text-color-secondary">
-    {{ authService.currentUserSig()?.displayName }}
+    {{ currentUser()?.displayName }}
   </h2>
-  } @if (!authService.currentUserSig()?.displayName) {
+  } @if (!currentUser()?.displayName) {
   <h3 class="text-color-secondary">Update your profile below</h3>
   }
 </div>

@@ -8,7 +8,7 @@
     <h1 [style]="{ color: 'var(--primary-color)' }">Polling App</h1>
   </a>
 
-  @if (authService.isAuthenticated()) {
+  @if (isAuthenticated()) {
   <div>
     <p-menu #menu [model]="items" [popup]="true"></p-menu>
     <p-button

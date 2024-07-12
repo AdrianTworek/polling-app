@@ -1,6 +1,6 @@
-@if (pollTypeSig() === pollType.Anonymous) {
+@if (pollType() === PollType.Anonymous) {
 <p>Anonymous</p>
-} @else if (pollTypeSig() === pollType.Public) {
+} @else if (pollType() === PollType.Public) {
 <p>Public</p>
 } @else {
 <div class="flex align-items-center justify-content-center flex-column gap-2">

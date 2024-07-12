@@ -14,10 +14,12 @@ import { AvatarModule } from 'primeng/avatar';
   templateUrl: './navbar.component.html',
 })
 export class NavbarComponent implements OnInit {
-  items: MenuItem[] | undefined;
-  authService = inject(AuthService);
+  private authService = inject(AuthService);
   private messageService = inject(MessageService);
   private router = inject(Router);
+
+  isAuthenticated = this.authService.isAuthenticated;
+  items: MenuItem[] | undefined;
 
   ngOnInit() {
     this.items = [

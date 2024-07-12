@@ -20,10 +20,10 @@ export class AuthComponent {
   private router = inject(Router);
   private fb = inject(FormBuilder);
 
-  isRegisterModeSig = signal(false);
+  isRegisterMode = signal(false);
   isLoading = signal(false);
 
-  authForm = this.fb.group({
+  authForm = this.fb.nonNullable.group({
     email: ['', [Validators.required, Validators.email]],
     password: [
       '',
@@ -73,7 +73,7 @@ export class AuthComponent {
     if (this.authForm.valid) {
       this.isLoading.set(true);
 
-      if (this.isRegisterModeSig()) {
+      if (this.isRegisterMode()) {
         this.authResultHandler(
           this.authService.registerWithEmailAndPassword(
             this.authForm.value.email!,
@@ -92,7 +92,7 @@ export class AuthComponent {
   }
 
   onToggleFormMode() {
-    this.isRegisterModeSig.set(!this.isRegisterModeSig());
+    this.isRegisterMode.set(!this.isRegisterMode());
     this.authForm.reset();
   }
 }

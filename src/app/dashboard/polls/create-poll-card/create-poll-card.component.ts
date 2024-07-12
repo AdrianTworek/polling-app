@@ -12,10 +12,10 @@ import { DialogModule } from 'primeng/dialog';
   templateUrl: './create-poll-card.component.html',
 })
 export class CreatePollCardComponent {
+  private router = inject(Router);
+
   visible = false;
   pollType = PollType;
-
-  private router = inject(Router);
 
   showDialog() {
     this.visible = true;

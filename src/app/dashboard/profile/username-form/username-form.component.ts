@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../../auth/auth.service';
 
@@ -15,13 +15,15 @@ import { MessageService } from 'primeng/api';
 export class UsernameFormComponent {
   private fb = inject(FormBuilder);
   private messageService = inject(MessageService);
-  authService = inject(AuthService);
+  private authService = inject(AuthService);
+  private destroyRef = inject(DestroyRef);
 
+  currentUser = this.authService.currentUser.asReadonly();
   isLoading = signal(false);
 
-  usernameForm = this.fb.group({
+  usernameForm = this.fb.nonNullable.group({
     username: [
-      this.authService.currentUserSig()?.displayName,
+      this.authService.currentUser()?.displayName,
       [Validators.required],
     ],
   });
@@ -33,7 +35,8 @@ export class UsernameFormComponent {
   onSubmit() {
     if (this.usernameForm.valid) {
       this.isLoading.set(true);
-      this.authService
+
+      const subscription = this.authService
         .updateUsername(this.usernameForm.value.username!)
         .subscribe({
           next: () => {
@@ -51,6 +54,8 @@ export class UsernameFormComponent {
             });
           },
         });
+
+      this.destroyRef.onDestroy(() => subscription.unsubscribe());
     }
   }
 }

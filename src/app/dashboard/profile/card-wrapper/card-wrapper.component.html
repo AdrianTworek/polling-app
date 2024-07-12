@@ -1,9 +1,9 @@
 <p-card>
   <div class="flex align-items-center gap-3">
-    @if (icon) {
-    <i [class]="icon" style="font-size: 1.75rem"></i>
+    @if (icon()) {
+    <i [class]="icon()" style="font-size: 1.75rem"></i>
     }
-    <h2 class="font-medium">{{ title }}</h2>
+    <h2 class="font-medium">{{ title() }}</h2>
   </div>
   <ng-content></ng-content>
 </p-card>

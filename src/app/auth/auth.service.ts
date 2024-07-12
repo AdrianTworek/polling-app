@@ -31,12 +31,12 @@ export class AuthService {
   private auth = inject(Auth);
   private db = inject(Firestore);
 
-  currentUserSig = signal<User | null>(null);
-  isAuthenticated = computed(() => !!this.currentUserSig());
+  currentUser = signal<User | null>(null);
+  isAuthenticated = computed(() => !!this.currentUser());
 
   constructor() {
     onAuthStateChanged(this.auth, (user) => {
-      this.currentUserSig.set(user);
+      this.currentUser.set(user);
     });
   }
 

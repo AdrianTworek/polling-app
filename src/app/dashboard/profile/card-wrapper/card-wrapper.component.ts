@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 import { CardModule } from 'primeng/card';
 
@@ -9,6 +9,6 @@ import { CardModule } from 'primeng/card';
   templateUrl: './card-wrapper.component.html',
 })
 export class CardWrapperComponent {
-  @Input({ required: true }) title!: string;
-  @Input() icon!: string;
+  title = input.required<string>();
+  icon = input.required<string>();
 }

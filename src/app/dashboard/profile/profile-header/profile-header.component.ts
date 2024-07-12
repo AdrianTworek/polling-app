@@ -11,5 +11,7 @@ import { AvatarGroupModule } from 'primeng/avatargroup';
   templateUrl: './profile-header.component.html',
 })
 export class ProfileHeaderComponent {
-  authService = inject(AuthService);
+  private authService = inject(AuthService);
+
+  currentUser = this.authService.currentUser.asReadonly();
 }

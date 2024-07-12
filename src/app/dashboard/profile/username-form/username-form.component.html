@@ -30,7 +30,7 @@
     label="Save"
     [disabled]="
       usernameForm.invalid ||
-      authService.currentUserSig()?.displayName === username.getRawValue()
+      currentUser()?.displayName === username.getRawValue()
     "
     [loading]="isLoading()"
   ></p-button>

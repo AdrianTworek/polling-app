@@ -1,6 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-
 import { PollType } from '../../../shared/types';
 
 import { ButtonModule } from 'primeng/button';
@@ -14,12 +13,12 @@ import { ButtonModule } from 'primeng/button';
 export class PollCreatorComponent {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
-  pollType = PollType;
-  pollTypeSig = signal<PollType>(PollType.Anonymous);
+  PollType = PollType;
+  pollType = signal<PollType>(PollType.Anonymous);
 
   constructor() {
     this.route.queryParams.subscribe((params) => {
-      this.pollTypeSig.set(params['type']);
+      this.pollType.set(params['type']);
     });
   }
 
