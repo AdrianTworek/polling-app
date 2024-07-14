@@ -1,7 +1,7 @@
 @if (pollType() === PollType.Anonymous) {
-<p>Anonymous</p>
+<app-new-anonymous-poll />
 } @else if (pollType() === PollType.Public) {
-<p>Public</p>
+<app-new-public-poll />
 } @else {
 <div class="flex align-items-center justify-content-center flex-column gap-2">
   <i
@@ -9,6 +9,6 @@
     style="font-size: 2rem; color: orange"
   ></i>
   <p>This poll type does not exist</p>
-  <p-button (click)="onGoBack()" label="Go Back"></p-button>
+  <p-button (click)="onGoBack()" label="Go Back" />
 </div>
 }
