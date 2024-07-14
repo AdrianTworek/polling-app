@@ -10,15 +10,15 @@
 
   @if (isAuthenticated()) {
   <div>
-    <p-menu #menu [model]="items" [popup]="true"></p-menu>
+    <p-menu #menu [model]="items" [popup]="true" />
     <p-button
       icon="pi pi-user"
       [rounded]="true"
       severity="info"
       (click)="menu.toggle($event)"
-    ></p-button>
+    />
   </div>
   } @else {
-  <p-button label="Get Started" routerLink="/auth"></p-button>
+  <p-button label="Get Started" routerLink="/auth" />
   }
 </nav>

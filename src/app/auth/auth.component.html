@@ -9,14 +9,14 @@
         severity="secondary"
         icon="pi pi-google"
         (click)="onSignUpWithGoogle()"
-      ></p-button>
+      />
       <p-button
         styleClass="w-full"
         label="GitHub"
         severity="secondary"
         icon="pi pi-github"
         (click)="onSignUpWithGitHub()"
-      ></p-button>
+      />
     </div>
   </div>
 
@@ -58,7 +58,7 @@
             [feedback]="false"
             [toggleMask]="true"
             formControlName="password"
-          ></p-password>
+          />
           <label for="password">Password</label>
         </span>
         @if (password.invalid && (password.dirty || password.touched)) {
@@ -80,7 +80,7 @@
         [label]="isRegisterMode() ? 'Register' : 'Login'"
         [disabled]="authForm.invalid"
         [loading]="isLoading()"
-      ></p-button>
+      />
     </form>
 
     <div class="flex gap-1">
