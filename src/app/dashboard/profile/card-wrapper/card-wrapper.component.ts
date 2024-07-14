@@ -10,5 +10,5 @@ import { CardModule } from 'primeng/card';
 })
 export class CardWrapperComponent {
   title = input.required<string>();
-  icon = input.required<string>();
+  icon = input<string>();
 }

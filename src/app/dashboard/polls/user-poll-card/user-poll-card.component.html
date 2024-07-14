@@ -1,0 +1,5 @@
+<app-card-wrapper [title]="poll().title | truncate : 50">
+  <h4 class="text-400 font-medium">
+    Created: {{ poll().createdAt.toDate() | date : "short" }}
+  </h4>
+</app-card-wrapper>

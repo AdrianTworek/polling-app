@@ -1,3 +1,15 @@
-<div class="max-w-15rem">
-  <app-create-poll-card />
+<div class="flex flex-wrap gap-4 justify-content-center">
+  <div class="w-full h-18rem lg:w-18rem">
+    <app-create-poll-card />
+  </div>
+  @for (poll of (polls$ | async); track poll.id) {
+  <div class="w-full h-18rem lg:w-18rem">
+    <app-user-poll-card [poll]="poll" />
+  </div>
+  }
 </div>
+@if ((polls$ | async )?.length === 0) {
+<div class="mt-8">
+  <h3 class="text-400 font-medium text-center">No polls found</h3>
+</div>
+}
