@@ -7,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Timestamp } from '@angular/fire/firestore';
 
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
@@ -14,7 +15,6 @@ import { MessageService } from 'primeng/api';
 
 import { PollsService } from '../../polls.service';
 import { PollType } from '../../../../shared/types';
-import { Timestamp } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-new-anonymous-poll',
