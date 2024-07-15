@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { ProfileHeaderComponent } from './profile-header/profile-header.component';
-import { CardWrapperComponent } from './card-wrapper/card-wrapper.component';
+import { CardWrapperComponent } from '../../shared/components/card-wrapper/card-wrapper.component';
 import { UsernameFormComponent } from './username-form/username-form.component';
 import { DeleteProfileComponent } from './delete-profile/delete-profile.component';
 

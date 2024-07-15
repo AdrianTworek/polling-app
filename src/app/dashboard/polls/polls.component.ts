@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { PollsService } from './polls.service';
 import { CreatePollCardComponent } from './create-poll-card/create-poll-card.component';
 import { Poll } from './poll.model';
-import { CardWrapperComponent } from '../profile/card-wrapper/card-wrapper.component';
+import { CardWrapperComponent } from '../../shared/components/card-wrapper/card-wrapper.component';
 import { TruncatePipe } from '../../shared/pipes/truncate.pipe';
 import { UserPollCardComponent } from './user-poll-card/user-poll-card.component';
 

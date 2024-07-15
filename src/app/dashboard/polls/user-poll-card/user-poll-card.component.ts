@@ -1,7 +1,7 @@
 import { Component, input } from '@angular/core';
 import { DatePipe } from '@angular/common';
 
-import { CardWrapperComponent } from '../../profile/card-wrapper/card-wrapper.component';
+import { CardWrapperComponent } from '../../../shared/components/card-wrapper/card-wrapper.component';
 import { TruncatePipe } from '../../../shared/pipes/truncate.pipe';
 import { Poll } from '../poll.model';
 
