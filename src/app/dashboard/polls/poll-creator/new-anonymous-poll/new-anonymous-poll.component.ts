@@ -84,7 +84,7 @@ export class NewAnonymousPollComponent {
             this.isLoading.set(false);
             this.messageService.add({
               severity: 'success',
-              summary: 'You have successfully created a poll',
+              summary: 'You have successfully created an anonymous poll',
             });
             this.router.navigate(['../'], {
               relativeTo: this.route,
