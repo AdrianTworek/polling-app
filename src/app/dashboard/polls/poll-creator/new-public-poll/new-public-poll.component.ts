@@ -15,6 +15,7 @@ import { MessageService } from 'primeng/api';
 
 import { PollsService } from '../../polls.service';
 import { PollType } from '../../../../shared/types';
+import { CustomValidators } from '../../../../shared/validators';
 
 @Component({
   selector: 'app-new-public-poll',
@@ -34,7 +35,11 @@ export class NewPublicPollComponent {
   pollForm = this.fb.nonNullable.group({
     title: [
       '',
-      [Validators.required, Validators.minLength(3), Validators.maxLength(255)],
+      [
+        CustomValidators.requiredTrimmed,
+        Validators.minLength(3),
+        Validators.maxLength(255),
+      ],
     ],
     options: this.fb.nonNullable.array<FormGroup>(
       [this.createOption('Option 1'), this.createOption('Option 2')],
@@ -62,7 +67,10 @@ export class NewPublicPollComponent {
 
   private createOption(value = ''): FormGroup {
     return this.fb.nonNullable.group({
-      option: [value, [Validators.required, Validators.maxLength(100)]],
+      option: [
+        value,
+        [CustomValidators.requiredTrimmed, Validators.maxLength(100)],
+      ],
     });
   }
 

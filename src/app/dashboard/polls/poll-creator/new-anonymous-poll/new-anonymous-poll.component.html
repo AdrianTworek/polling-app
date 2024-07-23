@@ -20,7 +20,7 @@
         </span>
         @if (title.invalid && (title.dirty || title.touched)) {
         <small class="block p-error">
-          @if (title.errors?.['required']) {
+          @if (title.errors?.['requiredTrimmed']) {
           <div>Title is required.</div>
           } @if (title.errors?.['minlength']) {
           <div>Title must contain at least 3 characters.</div>
@@ -56,7 +56,7 @@
         @if (option.get('option')?.invalid && (option.get('option')?.dirty ||
         option.get('option')?.touched)) {
         <small class="block p-error -mt-4">
-          @if (option.get('option')?.errors?.['required']) {
+          @if (option.get('option')?.errors?.['requiredTrimmed']) {
           <div>Option is required.</div>
           } @if (option.get('option')?.errors?.['maxlength']) {
           <div>Option must not exceed 100 characters.</div>

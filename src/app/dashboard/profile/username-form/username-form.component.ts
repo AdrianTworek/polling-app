@@ -1,10 +1,12 @@
 import { Component, DestroyRef, inject, signal } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../../auth/auth.service';
 
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { MessageService } from 'primeng/api';
+
+import { CustomValidators } from '../../../shared/validators';
 
 @Component({
   selector: 'app-username-form',
@@ -24,7 +26,7 @@ export class UsernameFormComponent {
   usernameForm = this.fb.nonNullable.group({
     username: [
       this.authService.currentUser()?.displayName,
-      [Validators.required],
+      [CustomValidators.requiredTrimmed],
     ],
   });
 

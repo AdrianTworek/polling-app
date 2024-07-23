@@ -16,7 +16,7 @@
     </span>
     @if (username.invalid && (username.dirty || username.touched)) {
     <small class="block p-error">
-      @if (username.errors?.['required']) {
+      @if (username.errors?.['requiredTrimmed']) {
       <div>Username is required.</div>
       }
     </small>
