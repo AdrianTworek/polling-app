@@ -76,16 +76,16 @@ export class NewPublicPollComponent {
   }
 
   onSubmit() {
-    console.log('Submitted', this.pollForm.value);
     if (this.pollForm.valid) {
       this.isLoading.set(true);
 
       const subscription = this.pollsService
         .createPoll({
           title: this.title.value,
-          options: this.options.value.map(
-            (option: { option: string }) => option.option
-          ),
+          options: this.options.value.map((option: { option: string }) => ({
+            value: option.option,
+            votes: 0,
+          })),
           type: PollType.Public,
           createdAt: Timestamp.now(),
         })

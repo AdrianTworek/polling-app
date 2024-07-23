@@ -8,5 +8,10 @@ export interface Poll {
   createdBy: string;
   createdAt: Timestamp;
   type: PollType;
-  options: string[];
+  options: PollOption;
+}
+
+export interface PollOption {
+  value: string;
+  votes: number;
 }

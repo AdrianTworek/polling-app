@@ -82,9 +82,10 @@ export class NewAnonymousPollComponent {
       const subscription = this.pollsService
         .createPoll({
           title: this.title.value,
-          options: this.options.value.map(
-            (option: { option: string }) => option.option
-          ),
+          options: this.options.value.map((option: { option: string }) => ({
+            value: option.option,
+            votes: 0,
+          })),
           type: PollType.Anonymous,
           createdAt: Timestamp.now(),
         })
