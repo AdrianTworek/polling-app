@@ -29,6 +29,15 @@
           }
         </small>
         }
+
+        <div class="flex gap-2 mt-3 align-items-center">
+          <p-checkbox
+            formControlName="multipleChoicesAllowed"
+            [binary]="true"
+            inputId="multipleChoicesAllowed"
+          />
+          <label for="multipleChoicesAllowed">Allow multiple choices</label>
+        </div>
       </div>
 
       <div class="flex flex-column gap-5" formArrayName="options">

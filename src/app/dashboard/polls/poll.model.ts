@@ -5,6 +5,7 @@ import { PollType } from '../../shared/types';
 export interface Poll {
   id: string;
   title: string;
+  multipleChoicesAllowed: boolean;
   createdBy: string;
   createdAt: Timestamp;
   type: PollType;

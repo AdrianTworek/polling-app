@@ -11,6 +11,7 @@ import { Timestamp } from '@angular/fire/firestore';
 
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+import { CheckboxModule } from 'primeng/checkbox';
 import { MessageService } from 'primeng/api';
 
 import { PollsService } from '../../polls.service';
@@ -20,7 +21,7 @@ import { CustomValidators } from '../../../../shared/validators';
 @Component({
   selector: 'app-new-anonymous-poll',
   standalone: true,
-  imports: [ReactiveFormsModule, ButtonModule, InputTextModule],
+  imports: [ReactiveFormsModule, ButtonModule, InputTextModule, CheckboxModule],
   templateUrl: './new-anonymous-poll.component.html',
 })
 export class NewAnonymousPollComponent {
@@ -42,6 +43,7 @@ export class NewAnonymousPollComponent {
         Validators.maxLength(255),
       ],
     ],
+    multipleChoicesAllowed: [false],
     options: this.fb.nonNullable.array<FormGroup>(
       [this.createOption('Option 1'), this.createOption('Option 2')],
       Validators.minLength(2)
@@ -82,10 +84,13 @@ export class NewAnonymousPollComponent {
       const subscription = this.pollsService
         .createPoll({
           title: this.title.value,
+          multipleChoicesAllowed:
+            this.pollForm.controls.multipleChoicesAllowed.value,
           options: this.options.value.map((option: { option: string }) => ({
             value: option.option,
             votes: 0,
           })),
+
           type: PollType.Anonymous,
           createdAt: Timestamp.now(),
         })
