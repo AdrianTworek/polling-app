@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, DestroyRef, inject, signal } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -29,6 +29,7 @@ export class NewAnonymousPollComponent {
   private router = inject(Router);
   private route = inject(ActivatedRoute);
   private messageService = inject(MessageService);
+  private destroyRef = inject(DestroyRef);
 
   isLoading = signal(false);
 
@@ -78,7 +79,7 @@ export class NewAnonymousPollComponent {
     if (this.pollForm.valid) {
       this.isLoading.set(true);
 
-      this.pollsService
+      const subscription = this.pollsService
         .createPoll({
           title: this.title.value,
           options: this.options.value.map(
@@ -107,6 +108,8 @@ export class NewAnonymousPollComponent {
             });
           },
         });
+
+      this.destroyRef.onDestroy(() => subscription.unsubscribe());
     }
   }
 }
