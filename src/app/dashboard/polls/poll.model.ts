@@ -9,7 +9,7 @@ export interface Poll {
   createdBy: string;
   createdAt: Timestamp;
   type: PollType;
-  options: PollOption;
+  options: PollOption[];
 }
 
 export interface PollOption {
