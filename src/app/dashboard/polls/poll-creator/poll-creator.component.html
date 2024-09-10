@@ -3,12 +3,7 @@
 } @else if (pollType() === PollType.Public) {
 <app-new-public-poll />
 } @else {
-<div class="flex align-items-center justify-content-center flex-column gap-2">
-  <i
-    class="pi pi-exclamation-triangle"
-    style="font-size: 2rem; color: orange"
-  ></i>
+<app-not-found>
   <p>This poll type does not exist</p>
-  <p-button (click)="onGoBack()" label="Go Back" />
-</div>
+</app-not-found>
 }

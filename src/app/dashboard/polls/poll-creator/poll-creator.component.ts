@@ -5,11 +5,17 @@ import { PollType } from '../../../shared/types';
 import { ButtonModule } from 'primeng/button';
 import { NewAnonymousPollComponent } from './new-anonymous-poll/new-anonymous-poll.component';
 import { NewPublicPollComponent } from './new-public-poll/new-public-poll.component';
+import { NotFoundComponent } from '../../../shared/components/not-found/not-found.component';
 
 @Component({
   selector: 'app-poll-creator',
   standalone: true,
-  imports: [ButtonModule, NewAnonymousPollComponent, NewPublicPollComponent],
+  imports: [
+    ButtonModule,
+    NewAnonymousPollComponent,
+    NewPublicPollComponent,
+    NotFoundComponent,
+  ],
   templateUrl: './poll-creator.component.html',
 })
 export class PollCreatorComponent {
@@ -21,12 +27,6 @@ export class PollCreatorComponent {
   constructor() {
     this.route.queryParams.subscribe((params) => {
       this.pollType.set(params['type']);
-    });
-  }
-
-  onGoBack() {
-    this.router.navigate(['../'], {
-      relativeTo: this.route,
     });
   }
 }

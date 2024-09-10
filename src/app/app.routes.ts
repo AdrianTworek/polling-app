@@ -10,6 +10,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProfileComponent } from './dashboard/profile/profile.component';
 import { PollsComponent } from './dashboard/polls/polls.component';
 import { PollCreatorComponent } from './dashboard/polls/poll-creator/poll-creator.component';
+import { PollVoteComponent } from './dashboard/polls/poll-vote/poll-vote.component';
+import { NotFoundComponent } from './shared/components/not-found/not-found.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['auth']);
 const redirectLoggedInToDashboard = () => redirectLoggedInTo(['dashboard']);
@@ -28,10 +30,15 @@ export const routes: Routes = [
       { path: '', redirectTo: 'polls', pathMatch: 'full' },
       { path: 'polls', component: PollsComponent },
       { path: 'polls/new', component: PollCreatorComponent },
+      { path: 'polls/:pollId/vote', component: PollVoteComponent },
       {
         path: 'profile',
         component: ProfileComponent,
       },
     ],
+  },
+  {
+    path: '**',
+    component: NotFoundComponent,
   },
 ];
