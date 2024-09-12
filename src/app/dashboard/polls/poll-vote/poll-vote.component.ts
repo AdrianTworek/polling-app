@@ -1,11 +1,4 @@
-import {
-  Component,
-  inject,
-  input,
-  signal,
-  DestroyRef,
-  computed,
-} from '@angular/core';
+import { Component, inject, input, DestroyRef, computed } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   FormArray,
@@ -16,6 +9,7 @@ import {
 } from '@angular/forms';
 import { toObservable, takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AsyncPipe } from '@angular/common';
+
 import { of } from 'rxjs';
 import { catchError, switchMap, tap } from 'rxjs/operators';
 
@@ -32,12 +26,14 @@ import { NotFoundComponent } from '../../../shared/components/not-found/not-foun
 import { CardWrapperComponent } from '../../../shared/components/card-wrapper/card-wrapper.component';
 import { CustomValidators } from '../../../shared/validators';
 import { TooltipModule } from 'primeng/tooltip';
+import { ObsWithStatusPipe } from '../../../shared/pipes/obs-with-status.pipe';
 
 @Component({
   selector: 'app-poll-vote',
   standalone: true,
   imports: [
     AsyncPipe,
+    ObsWithStatusPipe,
     NotFoundComponent,
     ProgressSpinnerModule,
     CardWrapperComponent,
@@ -59,7 +55,6 @@ export class PollVoteComponent {
   private messageService = inject(MessageService);
   private destroyRef = inject(DestroyRef);
 
-  isLoading = signal(false);
   user = computed(() => this.authService.currentUser());
 
   voteForm = this.fb.group({
@@ -67,18 +62,18 @@ export class PollVoteComponent {
   });
 
   poll$ = toObservable(this.pollId).pipe(
-    tap(() => this.isLoading.set(true)),
     switchMap((id) =>
       this.pollsService.getPollById(id).pipe(
-        catchError(() => of(null)),
+        catchError((error) => {
+          return of(null);
+        }),
         tap((poll) => {
           if (poll) {
             this.setupForm(poll);
           }
-          this.isLoading.set(false);
-        })
-      )
-    )
+        }),
+      ),
+    ),
   );
 
   get selectedOptions() {
@@ -90,7 +85,7 @@ export class PollVoteComponent {
 
     if (poll.multipleChoicesAllowed) {
       poll.options.forEach(() =>
-        this.selectedOptions.push(this.fb.control(false))
+        this.selectedOptions.push(this.fb.control(false)),
       );
     } else {
       this.selectedOptions.push(this.fb.control(null, Validators.required));
