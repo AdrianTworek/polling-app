@@ -1,9 +1,9 @@
 @if (pollType() === PollType.Anonymous) {
-<app-new-anonymous-poll />
+  <app-new-anonymous-poll />
 } @else if (pollType() === PollType.Public) {
-<app-new-public-poll />
+  <app-new-public-poll />
 } @else {
-<app-not-found>
-  <p>This poll type does not exist</p>
-</app-not-found>
+  <app-not-found>
+    <p>This poll type does not exist</p>
+  </app-not-found>
 }

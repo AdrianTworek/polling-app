@@ -77,15 +77,15 @@ export class AuthComponent {
         this.authResultHandler(
           this.authService.registerWithEmailAndPassword(
             this.authForm.value.email!,
-            this.authForm.value.password!
-          )
+            this.authForm.value.password!,
+          ),
         );
       } else {
         this.authResultHandler(
           this.authService.loginWithEmailAndPassword(
             this.authForm.value.email!,
-            this.authForm.value.password!
-          )
+            this.authForm.value.password!,
+          ),
         );
       }
     }

@@ -42,7 +42,7 @@ export class AuthService {
 
   private async signUpWithProvider(
     provider: AuthProvider,
-    providerName: string
+    providerName: string,
   ) {
     return signInWithPopup(this.auth, provider)
       .then((result) => this.storeUserInDatabaseHandler(result, providerName))
@@ -54,7 +54,7 @@ export class AuthService {
 
   private async storeUserInDatabaseHandler(
     result: UserCredential,
-    providerName: string
+    providerName: string,
   ) {
     const user = result.user;
 

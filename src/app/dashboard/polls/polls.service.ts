@@ -29,7 +29,7 @@ export class PollsService {
     const userPollsQuery = query(
       this.pollsCollection,
       where('createdBy', '==', this.authService.currentUser()?.uid),
-      orderBy('createdAt', 'desc')
+      orderBy('createdAt', 'desc'),
     );
     return collectionData(userPollsQuery, { idField: 'id' }) as Observable<
       Poll[]

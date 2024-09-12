@@ -42,13 +42,14 @@
           <label for="email">Email Address</label>
         </span>
         @if (email.invalid && (email.dirty || email.touched)) {
-        <small class="block p-error">
-          @if (email.errors?.['required']) {
-          <div>Email is required.</div>
-          } @if (email.errors?.['email']) {
-          <div>Email must be valid.</div>
-          }
-        </small>
+          <small class="block p-error">
+            @if (email.errors?.["required"]) {
+              <div>Email is required.</div>
+            }
+            @if (email.errors?.["email"]) {
+              <div>Email must be valid.</div>
+            }
+          </small>
         }
       </div>
 
@@ -62,15 +63,17 @@
           <label for="password">Password</label>
         </span>
         @if (password.invalid && (password.dirty || password.touched)) {
-        <small class="block p-error">
-          @if (password.errors?.['required']) {
-          <div>Password is required.</div>
-          } @if (password.errors?.['minlength']) {
-          <div>Password must contain at least 6 characters.</div>
-          } @if (password.errors?.['maxlength']) {
-          <div>Password must not exceed 32 characters.</div>
-          }
-        </small>
+          <small class="block p-error">
+            @if (password.errors?.["required"]) {
+              <div>Password is required.</div>
+            }
+            @if (password.errors?.["minlength"]) {
+              <div>Password must contain at least 6 characters.</div>
+            }
+            @if (password.errors?.["maxlength"]) {
+              <div>Password must not exceed 32 characters.</div>
+            }
+          </small>
         }
       </div>
 

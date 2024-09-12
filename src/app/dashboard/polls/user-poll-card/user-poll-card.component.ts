@@ -44,7 +44,7 @@ export class UserPollCardComponent {
           severity: 'error',
           summary: 'Failed to copy poll link',
         });
-      }
+      },
     );
   }
 }

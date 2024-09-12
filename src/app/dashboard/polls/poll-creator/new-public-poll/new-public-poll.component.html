@@ -19,15 +19,17 @@
           <label for="title">Title</label>
         </span>
         @if (title.invalid && (title.dirty || title.touched)) {
-        <small class="block p-error">
-          @if (title.errors?.['requiredTrimmed']) {
-          <div>Title is required.</div>
-          } @if (title.errors?.['minlength']) {
-          <div>Title must contain at least 3 characters.</div>
-          } @if (title.errors?.['maxlength']) {
-          <div>Title must not exceed 255 characters.</div>
-          }
-        </small>
+          <small class="block p-error">
+            @if (title.errors?.["requiredTrimmed"]) {
+              <div>Title is required.</div>
+            }
+            @if (title.errors?.["minlength"]) {
+              <div>Title must contain at least 3 characters.</div>
+            }
+            @if (title.errors?.["maxlength"]) {
+              <div>Title must not exceed 255 characters.</div>
+            }
+          </small>
         }
 
         <div class="flex gap-2 mt-3 align-items-center">
@@ -42,36 +44,40 @@
 
       <div class="flex flex-column gap-5" formArrayName="options">
         @for (option of options.controls; track option) {
-        <div class="flex align-items-center gap-3" [formGroupName]="$index">
-          <span class="p-float-label w-full">
-            <input
-              class="w-full"
-              type="text"
-              [id]="'option_' + $index"
-              pInputText
-              formControlName="option"
-            />
-            <label [for]="'option_' + $index">Option {{ $index + 1 }}</label>
-          </span>
-          @if (options.length > 2) {
-          <p-button
-            type="button"
-            icon="pi pi-times"
-            severity="danger"
-            (click)="removeOption($index)"
-          />
+          <div class="flex align-items-center gap-3" [formGroupName]="$index">
+            <span class="p-float-label w-full">
+              <input
+                class="w-full"
+                type="text"
+                [id]="'option_' + $index"
+                pInputText
+                formControlName="option"
+              />
+              <label [for]="'option_' + $index">Option {{ $index + 1 }}</label>
+            </span>
+            @if (options.length > 2) {
+              <p-button
+                type="button"
+                icon="pi pi-times"
+                severity="danger"
+                (click)="removeOption($index)"
+              />
+            }
+          </div>
+          @if (
+            option.get("option")?.invalid &&
+            (option.get("option")?.dirty || option.get("option")?.touched)
+          ) {
+            <small class="block p-error -mt-4">
+              @if (option.get("option")?.errors?.["requiredTrimmed"]) {
+                <div>Option is required.</div>
+              }
+              @if (option.get("option")?.errors?.["maxlength"]) {
+                <div>Option must not exceed 100 characters.</div>
+              }
+            </small>
           }
-        </div>
-        @if (option.get('option')?.invalid && (option.get('option')?.dirty ||
-        option.get('option')?.touched)) {
-        <small class="block p-error -mt-4">
-          @if (option.get('option')?.errors?.['requiredTrimmed']) {
-          <div>Option is required.</div>
-          } @if (option.get('option')?.errors?.['maxlength']) {
-          <div>Option must not exceed 100 characters.</div>
-          }
-        </small>
-        } }
+        }
       </div>
 
       <div class="flex">

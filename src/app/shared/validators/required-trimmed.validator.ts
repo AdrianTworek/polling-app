@@ -1,7 +1,7 @@
 import { AbstractControl, ValidationErrors } from '@angular/forms';
 
 export const requiredTrimmed = (
-  control: AbstractControl
+  control: AbstractControl,
 ): ValidationErrors | null => {
   const value = control.value;
 

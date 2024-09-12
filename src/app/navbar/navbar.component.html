@@ -9,16 +9,16 @@
   </a>
 
   @if (isAuthenticated()) {
-  <div>
-    <p-menu #menu [model]="items" [popup]="true" />
-    <p-button
-      icon="pi pi-user"
-      [rounded]="true"
-      severity="info"
-      (click)="menu.toggle($event)"
-    />
-  </div>
+    <div>
+      <p-menu #menu [model]="items" [popup]="true" />
+      <p-button
+        icon="pi pi-user"
+        [rounded]="true"
+        severity="info"
+        (click)="menu.toggle($event)"
+      />
+    </div>
   } @else {
-  <p-button label="Get Started" routerLink="/auth" />
+    <p-button label="Get Started" routerLink="/auth" />
   }
 </nav>

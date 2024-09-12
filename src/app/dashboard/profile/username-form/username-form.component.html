@@ -15,11 +15,11 @@
       <label for="username">Username</label>
     </span>
     @if (username.invalid && (username.dirty || username.touched)) {
-    <small class="block p-error">
-      @if (username.errors?.['requiredTrimmed']) {
-      <div>Username is required.</div>
-      }
-    </small>
+      <small class="block p-error">
+        @if (username.errors?.["requiredTrimmed"]) {
+          <div>Username is required.</div>
+        }
+      </small>
     }
   </div>
 

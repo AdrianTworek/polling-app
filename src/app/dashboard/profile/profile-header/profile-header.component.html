@@ -1,15 +1,16 @@
 <div class="flex gap-3">
   @if (currentUser()?.photoURL && currentUser()?.displayName) {
-  <p-avatar
-    [image]="currentUser()?.photoURL!"
-    size="xlarge"
-    shape="circle"
-    alt="user avatar"
-  />
-  <h2 class="text-color-secondary">
-    {{ currentUser()?.displayName }}
-  </h2>
-  } @if (!currentUser()?.displayName) {
-  <h3 class="text-color-secondary">Update your profile below</h3>
+    <p-avatar
+      [image]="currentUser()?.photoURL!"
+      size="xlarge"
+      shape="circle"
+      alt="user avatar"
+    />
+    <h2 class="text-color-secondary">
+      {{ currentUser()?.displayName }}
+    </h2>
+  }
+  @if (!currentUser()?.displayName) {
+    <h3 class="text-color-secondary">Update your profile below</h3>
   }
 </div>

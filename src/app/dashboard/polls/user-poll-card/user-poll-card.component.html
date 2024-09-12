@@ -1,13 +1,13 @@
-<app-card-wrapper [title]="poll().title | truncate : 50">
+<app-card-wrapper [title]="poll().title | truncate: 50">
   <h4 class="text-400 font-medium">
-    Created: {{ poll().createdAt.toDate() | date : "short" }}
+    Created: {{ poll().createdAt.toDate() | date: "short" }}
   </h4>
   <div class="flex align-items-center gap-2">
     <div
       class="flex align-items-center justify-content-center border-round-3xl w-min px-3 py-2"
       [class]="{
         'bg-indigo-600': poll().type === pollType.Public,
-        'bg-gray-500': poll().type !== pollType.Public
+        'bg-gray-500': poll().type !== pollType.Public,
       }"
     >
       <span class="text-xs text-white text-center font-medium">{{
