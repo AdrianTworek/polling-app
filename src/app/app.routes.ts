@@ -23,6 +23,10 @@ export const routes: Routes = [
     ...canActivate(redirectLoggedInToDashboard),
   },
   {
+    path: 'polls/:pollId/vote',
+    component: PollVoteComponent,
+  },
+  {
     path: 'dashboard',
     component: DashboardComponent,
     ...canActivate(redirectUnauthorizedToLogin),
@@ -30,7 +34,6 @@ export const routes: Routes = [
       { path: '', redirectTo: 'polls', pathMatch: 'full' },
       { path: 'polls', component: PollsComponent },
       { path: 'polls/new', component: PollCreatorComponent },
-      { path: 'polls/:pollId/vote', component: PollVoteComponent },
       {
         path: 'profile',
         component: ProfileComponent,

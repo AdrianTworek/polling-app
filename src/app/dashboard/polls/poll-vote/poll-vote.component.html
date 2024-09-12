@@ -1,0 +1,51 @@
+<div class="mt-6">
+  @if (poll$ | async; as poll) {
+  <app-card-wrapper [title]="poll.title">
+    <form [formGroup]="voteForm" (ngSubmit)="onSubmit()">
+      <ul class="flex flex-column gap-3 list-none p-0">
+        @for (option of poll.options; track option.value; let i = $index) {
+        <li>
+          @if (poll.multipleChoicesAllowed) {
+          <p-checkbox
+            [formControl]="selectedOptions.at(i)"
+            [value]="option.value"
+            [label]="option.value"
+            [binary]="true"
+          />
+          } @else {
+          <p-radioButton
+            [formControl]="selectedOptions.at(0)"
+            [value]="option.value"
+            [label]="option.value"
+          />
+          }
+        </li>
+        }
+      </ul>
+      <div>
+        <p-button
+          type="submit"
+          label="Vote"
+          [disabled]="voteForm.invalid || !user()?.uid"
+        />
+        @if (!user()?.uid) {
+        <div class="flex align-items-center gap-2">
+          <i class="pi pi-exclamation-circle" style="color: red"></i>
+          <p>You need to be logged in to vote</p>
+        </div>
+        }
+      </div>
+    </form>
+  </app-card-wrapper>
+  } @else if (isLoading()) {
+  <p-progressSpinner
+    styleClass="w-full m-auto"
+    strokeWidth="4"
+    ariaLabel="loading"
+  />
+  } @else {
+  <app-not-found>
+    <p>This poll does not exist</p>
+  </app-not-found>
+  }
+</div>
