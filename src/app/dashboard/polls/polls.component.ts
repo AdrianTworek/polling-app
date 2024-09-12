@@ -8,6 +8,7 @@ import { TruncatePipe } from '../../shared/pipes/truncate.pipe';
 import { UserPollCardComponent } from './user-poll-card/user-poll-card.component';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { ObsWithStatusPipe } from '../../shared/pipes/obs-with-status.pipe';
+import { NotFoundComponent } from '../../shared/components/not-found/not-found.component';
 
 @Component({
   selector: 'app-polls',
@@ -21,6 +22,7 @@ import { ObsWithStatusPipe } from '../../shared/pipes/obs-with-status.pipe';
     CardWrapperComponent,
     UserPollCardComponent,
     ProgressSpinnerModule,
+    NotFoundComponent,
   ],
   templateUrl: './polls.component.html',
 })

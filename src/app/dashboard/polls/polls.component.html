@@ -22,6 +22,8 @@
       ariaLabel="loading"
     />
   } @else {
-    <p>{{ polls.error }}</p>
+    <app-not-found>
+      <p>{{ polls.error }}</p>
+    </app-not-found>
   }
 }
