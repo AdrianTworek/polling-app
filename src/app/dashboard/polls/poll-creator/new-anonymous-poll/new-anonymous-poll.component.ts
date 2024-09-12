@@ -7,7 +7,6 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Timestamp } from '@angular/fire/firestore';
 
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
@@ -90,9 +89,7 @@ export class NewAnonymousPollComponent {
             value: option.option,
             votes: 0,
           })),
-
           type: PollType.Anonymous,
-          createdAt: Timestamp.now(),
         })
         .subscribe({
           next: () => {
