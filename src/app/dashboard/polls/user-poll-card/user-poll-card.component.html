@@ -28,5 +28,17 @@
       pTooltip="Copy link to clipboard"
       tooltipPosition="bottom"
     />
+    <p-button
+      icon="pi pi-trash"
+      severity="danger"
+      [rounded]="true"
+      [text]="true"
+      [raised]="true"
+      pTooltip="Delete poll"
+      tooltipPosition="bottom"
+      (onClick)="confirmDeletePoll($event)"
+    />
   </div>
 </app-card-wrapper>
+
+<p-confirmDialog />

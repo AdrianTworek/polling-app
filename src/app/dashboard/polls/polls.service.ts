@@ -104,6 +104,29 @@ export class PollsService {
     );
   }
 
+  deletePoll(pollId: string) {
+    const pollRef = doc(this.db, 'polls', pollId);
+    const userId = this.authService.currentUser()?.uid;
+
+    const promise = runTransaction(this.db, async (tx) => {
+      const pollDoc = await tx.get(pollRef);
+
+      if (!pollDoc.exists()) {
+        throw new Error('Poll not found');
+      }
+
+      const poll = pollDoc.data() as Poll;
+
+      if (poll.createdBy !== userId) {
+        throw new Error('You cannot delete this poll');
+      }
+
+      tx.delete(pollRef);
+    });
+
+    return from(promise);
+  }
+
   vote(pollId: string, selectedOptions: SelectedOption[]) {
     const userId = this.authService.currentUser()?.uid;
     const pollRef = doc(this.db, 'polls', pollId);
