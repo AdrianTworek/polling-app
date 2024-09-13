@@ -1,18 +1,11 @@
-import { Location } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 
-import { ButtonModule } from 'primeng/button';
+import { GoBackButtonComponent } from '../go-back-button/go-back-button.component';
 
 @Component({
   selector: 'app-not-found',
   standalone: true,
-  imports: [ButtonModule],
+  imports: [GoBackButtonComponent],
   templateUrl: './not-found.component.html',
 })
-export class NotFoundComponent {
-  private location = inject(Location);
-
-  onGoBack() {
-    this.location.back();
-  }
-}
+export class NotFoundComponent {}
