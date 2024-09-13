@@ -1,4 +1,8 @@
-<app-card-wrapper [title]="poll().title | truncate: 50">
+<app-card-wrapper
+  [title]="poll().title | truncate: 50"
+  (click)="navigateToPoll()"
+  style="cursor: pointer"
+>
   <h4 class="text-400 font-medium">
     Created: {{ poll().createdAt.toDate() | date: "short" }}
   </h4>
@@ -20,9 +24,9 @@
       [rounded]="true"
       [text]="true"
       [raised]="true"
-      (onClick)="copyPollLinkToClipboard()"
+      (onClick)="copyPollLinkToClipboard($event)"
       pTooltip="Copy link to clipboard"
-      tooltipPosition="top"
+      tooltipPosition="bottom"
     />
   </div>
 </app-card-wrapper>

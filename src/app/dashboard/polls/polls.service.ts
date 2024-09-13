@@ -6,13 +6,22 @@ import {
   doc,
   docData,
   Firestore,
+  getDocs,
   orderBy,
   query,
   runTransaction,
   Timestamp,
   where,
 } from '@angular/fire/firestore';
-import { from, Observable } from 'rxjs';
+import {
+  catchError,
+  combineLatest,
+  from,
+  map,
+  Observable,
+  of,
+  switchMap,
+} from 'rxjs';
 
 import { Poll, PollCreate, SelectedOption } from './poll.model';
 import { AuthService } from '../../auth/auth.service';
@@ -24,6 +33,7 @@ export class PollsService {
   private authService = inject(AuthService);
   private db = inject(Firestore);
   private pollsCollection = collection(this.db, 'polls');
+  private usersCollection = collection(this.db, 'users');
 
   getUserPolls(): Observable<Poll[]> {
     const userPollsQuery = query(
@@ -49,6 +59,49 @@ export class PollsService {
   getPollById(id: string): Observable<Poll | undefined> {
     const pollRef = doc(this.db, 'polls', id);
     return docData(pollRef, { idField: 'id' }) as Observable<Poll | undefined>;
+  }
+
+  getPollWithAuthor(id: string) {
+    return this.getPollById(id).pipe(
+      switchMap((poll) => {
+        if (!poll) {
+          return of(null);
+        }
+
+        const authorId = poll.createdBy;
+        const authorQuery = query(
+          this.usersCollection,
+          where('uid', '==', authorId),
+        );
+
+        const poll$ = of(poll);
+        const author$ = from(getDocs(authorQuery)).pipe(
+          switchMap((snapshot) => {
+            if (!snapshot.empty) {
+              const author = snapshot.docs[0];
+              const authorData = author.data();
+              return of({
+                id: author.id,
+                uid: authorData['uid'] as string,
+                name: authorData['name'] as string,
+                photoUrl: authorData['photoUrl'] as string,
+              });
+            }
+            return of(null);
+          }),
+          catchError(() => of(null)),
+        );
+
+        return combineLatest([poll$, author$]).pipe(
+          map(([pollData, authorData]) => {
+            return {
+              ...pollData,
+              author: authorData,
+            };
+          }),
+        );
+      }),
+    );
   }
 
   vote(pollId: string, selectedOptions: SelectedOption[]) {

@@ -1,5 +1,6 @@
 import { Component, input, inject } from '@angular/core';
 import { DatePipe, UpperCasePipe } from '@angular/common';
+import { Router } from '@angular/router';
 
 import { TruncatePipe } from '../../../shared/pipes/truncate.pipe';
 import { Poll } from '../poll.model';
@@ -28,8 +29,11 @@ export class UserPollCardComponent {
   pollType = PollType;
 
   private messageService = inject(MessageService);
+  private router = inject(Router);
 
-  copyPollLinkToClipboard() {
+  copyPollLinkToClipboard(event: Event) {
+    event.stopPropagation();
+
     const pollLink = `${window.location.origin}/polls/${this.poll().id}/vote`;
     navigator.clipboard.writeText(pollLink).then(
       () => {
@@ -46,5 +50,9 @@ export class UserPollCardComponent {
         });
       },
     );
+  }
+
+  navigateToPoll() {
+    this.router.navigate(['/polls', this.poll().id]);
   }
 }
