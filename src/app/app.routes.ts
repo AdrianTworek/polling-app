@@ -13,6 +13,7 @@ import { PollCreatorComponent } from './dashboard/polls/poll-creator/poll-creato
 import { PollVoteComponent } from './dashboard/polls/poll-vote/poll-vote.component';
 import { NotFoundComponent } from './shared/components/not-found/not-found.component';
 import { PollDetailsComponent } from './dashboard/polls/poll-details/poll-details.component';
+import { anonymousPollGuard } from './dashboard/polls/guards/anonymous-poll.guard';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['auth']);
 const redirectLoggedInToDashboard = () => redirectLoggedInTo(['dashboard']);
@@ -30,6 +31,7 @@ export const routes: Routes = [
   {
     path: 'polls/:pollId',
     component: PollDetailsComponent,
+    canActivate: [anonymousPollGuard],
   },
   {
     path: 'dashboard',

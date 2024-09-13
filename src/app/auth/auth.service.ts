@@ -34,9 +34,12 @@ export class AuthService {
   currentUser = signal<User | null>(null);
   isAuthenticated = computed(() => !!this.currentUser());
 
+  authInitialized = signal(false);
+
   constructor() {
     onAuthStateChanged(this.auth, (user) => {
       this.currentUser.set(user);
+      this.authInitialized.set(true);
     });
   }
 
