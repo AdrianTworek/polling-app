@@ -30,7 +30,9 @@
             <h4 class="text-400 font-medium">
               Answers ({{ poll.value.votedBy.length }}
               {{
-                poll.value.votedBy.length > 1 ? "interviewees" : "interviewee"
+                poll.value.votedBy.length === 0 || poll.value.votedBy.length > 1
+                  ? "interviewees"
+                  : "interviewee"
               }}):
             </h4>
             <ul class="flex flex-column gap-2">
