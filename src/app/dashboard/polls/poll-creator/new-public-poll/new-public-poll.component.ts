@@ -45,7 +45,7 @@ export class NewPublicPollComponent {
     multipleChoicesAllowed: [false],
     options: this.fb.nonNullable.array<FormGroup>(
       [this.createOption('Option 1'), this.createOption('Option 2')],
-      Validators.minLength(2),
+      [Validators.minLength(2), Validators.maxLength(10)],
     ),
   });
 

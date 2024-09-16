@@ -81,13 +81,15 @@
       </div>
 
       <div class="flex">
-        <p-button
-          type="button"
-          label="Add Option"
-          icon="pi pi-plus"
-          severity="secondary"
-          (click)="addOption()"
-        />
+        @if (options.length < 10) {
+          <p-button
+            type="button"
+            label="Add Option"
+            icon="pi pi-plus"
+            severity="secondary"
+            (click)="addOption()"
+          />
+        }
       </div>
 
       <p-button

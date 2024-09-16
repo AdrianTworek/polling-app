@@ -47,6 +47,14 @@ export class PollsService {
   }
 
   createPoll(poll: PollCreate) {
+    if (poll.options.length < 2) {
+      throw new Error('At least 2 options are required');
+    }
+
+    if (poll.options.length > 10) {
+      throw new Error('At most 10 options are allowed');
+    }
+
     const promise = addDoc(this.pollsCollection, {
       ...poll,
       createdBy: this.authService.currentUser()?.uid,
