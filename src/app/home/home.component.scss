@@ -1,0 +1,21 @@
+.hero-image-container {
+  width: 90vw;
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-image {
+  width: 100%;
+  max-width: 90vw;
+}
+
+@media screen and (min-width: 768px) {
+  .hero-image-container {
+    width: 80vw;
+  }
+
+  .hero-image {
+    max-width: 700px;
+  }
+}

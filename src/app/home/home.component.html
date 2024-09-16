@@ -3,9 +3,9 @@
 >
   <div class="text-center mb-4">
     <h1 class="md:text-6xl font-bold text-blue-400">Engage and Vote</h1>
-    <h3 class="md:text-2xl font-semibold mb-4 text-gray-400">
+    <h2 class="text-base md:text-2xl font-semibold mb-4 text-gray-400">
       Create, share, and participate in polls effortlessly.
-    </h3>
+    </h2>
     <p-button
       label="Get Started"
       icon="pi pi-arrow-right"
@@ -13,14 +13,30 @@
       routerLink="/auth"
     />
   </div>
-  <div class="flex justify-content-center">
-    <img
-      src="assets/images/hero.png"
-      alt="Hero"
-      class="w-full max-w-lg md:max-w-2xl lg:max-w-3xl"
-      style="height: auto"
-      loading="eager"
-      fetchpriority="high"
-    />
+  <div class="flex justify-content-center w-full">
+    <picture class="hero-image-container">
+      <source
+        srcset="
+          assets/images/hero-small.webp   600w,
+          assets/images/hero-medium.webp 1200w,
+          assets/images/hero-large.webp  1800w
+        "
+        sizes="(max-width: 600px) 600px, (max-width: 1200px) 1200px, 1800px"
+        type="image/webp"
+      />
+      <img
+        src="assets/images/hero-large.png"
+        srcset="
+          assets/images/hero-small.png   600w,
+          assets/images/hero-medium.png 1200w,
+          assets/images/hero-large.png  1800w
+        "
+        sizes="(max-width: 600px) 600px, (max-width: 1200px) 1200px, 1800px"
+        alt="Hero"
+        class="hero-image"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </picture>
   </div>
 </div>

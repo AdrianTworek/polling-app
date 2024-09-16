@@ -8,5 +8,6 @@ import { ButtonModule } from 'primeng/button';
   standalone: true,
   imports: [ButtonModule, RouterLink],
   templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {}
