@@ -8,15 +8,14 @@ import { NewPublicPollComponent } from './new-public-poll/new-public-poll.compon
 import { NotFoundComponent } from '../../../shared/components/not-found/not-found.component';
 
 @Component({
-  selector: 'app-poll-creator',
-  standalone: true,
-  imports: [
-    ButtonModule,
-    NewAnonymousPollComponent,
-    NewPublicPollComponent,
-    NotFoundComponent,
-  ],
-  templateUrl: './poll-creator.component.html',
+    selector: 'app-poll-creator',
+    imports: [
+        ButtonModule,
+        NewAnonymousPollComponent,
+        NewPublicPollComponent,
+        NotFoundComponent,
+    ],
+    templateUrl: './poll-creator.component.html'
 })
 export class PollCreatorComponent {
   private route = inject(ActivatedRoute);

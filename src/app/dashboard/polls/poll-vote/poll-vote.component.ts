@@ -30,7 +30,6 @@ import { ObsWithStatusPipe } from '../../../shared/pipes/obs-with-status.pipe';
 
 @Component({
   selector: 'app-poll-vote',
-  standalone: true,
   imports: [
     AsyncPipe,
     ObsWithStatusPipe,

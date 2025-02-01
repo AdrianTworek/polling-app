@@ -1,5 +1,5 @@
 import { Component, computed, inject, input, signal } from '@angular/core';
-import { AsyncPipe, DatePipe, JsonPipe } from '@angular/common';
+import { AsyncPipe, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { switchMap } from 'rxjs';
@@ -22,12 +22,10 @@ interface ChartType {
 
 @Component({
   selector: 'app-poll-details',
-  standalone: true,
   imports: [
     AsyncPipe,
     ObsWithStatusPipe,
     DatePipe,
-    JsonPipe,
     RouterLink,
     FormsModule,
     NotFoundComponent,

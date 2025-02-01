@@ -9,10 +9,9 @@ import { MessageService } from 'primeng/api';
 import { CustomValidators } from '../../../shared/validators';
 
 @Component({
-  selector: 'app-username-form',
-  standalone: true,
-  imports: [ReactiveFormsModule, InputTextModule, ButtonModule],
-  templateUrl: './username-form.component.html',
+    selector: 'app-username-form',
+    imports: [ReactiveFormsModule, InputTextModule, ButtonModule],
+    templateUrl: './username-form.component.html'
 })
 export class UsernameFormComponent {
   private fb = inject(FormBuilder);

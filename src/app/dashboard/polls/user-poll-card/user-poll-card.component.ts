@@ -16,7 +16,6 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @Component({
   selector: 'app-user-poll-card',
-  standalone: true,
   imports: [
     DatePipe,
     TruncatePipe,

@@ -7,7 +7,6 @@ import { DialogModule } from 'primeng/dialog';
 
 @Component({
   selector: 'app-create-poll-card',
-  standalone: true,
   imports: [CardModule, DialogModule],
   templateUrl: './create-poll-card.component.html',
 })

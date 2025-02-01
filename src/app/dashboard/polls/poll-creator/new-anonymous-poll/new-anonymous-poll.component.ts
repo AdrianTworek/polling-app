@@ -18,10 +18,9 @@ import { PollType } from '../../../../shared/types';
 import { CustomValidators } from '../../../../shared/validators';
 
 @Component({
-  selector: 'app-new-anonymous-poll',
-  standalone: true,
-  imports: [ReactiveFormsModule, ButtonModule, InputTextModule, CheckboxModule],
-  templateUrl: './new-anonymous-poll.component.html',
+    selector: 'app-new-anonymous-poll',
+    imports: [ReactiveFormsModule, ButtonModule, InputTextModule, CheckboxModule],
+    templateUrl: './new-anonymous-poll.component.html'
 })
 export class NewAnonymousPollComponent {
   private fb = inject(FormBuilder);

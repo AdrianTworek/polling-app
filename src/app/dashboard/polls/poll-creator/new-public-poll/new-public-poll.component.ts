@@ -18,10 +18,9 @@ import { PollType } from '../../../../shared/types';
 import { CustomValidators } from '../../../../shared/validators';
 
 @Component({
-  selector: 'app-new-public-poll',
-  standalone: true,
-  imports: [ReactiveFormsModule, ButtonModule, InputTextModule, CheckboxModule],
-  templateUrl: './new-public-poll.component.html',
+    selector: 'app-new-public-poll',
+    imports: [ReactiveFormsModule, ButtonModule, InputTextModule, CheckboxModule],
+    templateUrl: './new-public-poll.component.html'
 })
 export class NewPublicPollComponent {
   private fb = inject(FormBuilder);

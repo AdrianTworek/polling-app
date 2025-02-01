@@ -8,11 +8,10 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 
 @Component({
-  selector: 'app-delete-profile',
-  standalone: true,
-  imports: [ButtonModule, ConfirmDialogModule, ToastModule],
-  templateUrl: './delete-profile.component.html',
-  providers: [ConfirmationService, MessageService],
+    selector: 'app-delete-profile',
+    imports: [ButtonModule, ConfirmDialogModule, ToastModule],
+    templateUrl: './delete-profile.component.html',
+    providers: [ConfirmationService, MessageService]
 })
 export class DeleteProfileComponent {
   private confirmationService = inject(ConfirmationService);

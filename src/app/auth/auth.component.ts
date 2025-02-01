@@ -9,10 +9,9 @@ import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 
 @Component({
-  selector: 'app-auth',
-  standalone: true,
-  imports: [ReactiveFormsModule, ButtonModule, InputTextModule, PasswordModule],
-  templateUrl: './auth.component.html',
+    selector: 'app-auth',
+    imports: [ReactiveFormsModule, ButtonModule, InputTextModule, PasswordModule],
+    templateUrl: './auth.component.html'
 })
 export class AuthComponent {
   private authService = inject(AuthService);
