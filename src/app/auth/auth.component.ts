@@ -39,6 +39,19 @@ export class AuthComponent {
     return this.authForm.controls.password;
   }
 
+  private formatErrorMessage(errorCode: string) {
+    switch (errorCode) {
+      case 'auth/invalid-credential':
+        return 'Invalid credentials';
+      case 'auth/email-already-in-use':
+        return 'This email is already in use';
+      case 'auth/weak-password':
+        return 'Password must be at least 6 characters long';
+      default:
+        return 'Please try again';
+    }
+  }
+
   private authResultHandler(promise: Promise<any>) {
     promise
       .then(() => {
@@ -53,7 +66,7 @@ export class AuthComponent {
         this.messageService.add({
           severity: 'error',
           summary: 'Something went wrong',
-          detail: error,
+          detail: this.formatErrorMessage(error.code),
         });
       })
       .finally(() => {
