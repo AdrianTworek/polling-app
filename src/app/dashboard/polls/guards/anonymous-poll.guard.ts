@@ -7,7 +7,7 @@ import { PollsService } from '../polls.service';
 import { AuthService } from '../../../auth/auth.service';
 import { PollType } from '../../../shared/types';
 
-export const anonymousPollGuard: CanActivateFn = (route, state) => {
+export const anonymousPollGuard: CanActivateFn = (route) => {
   const pollId = route.paramMap.get('pollId') as string;
   const pollService = inject(PollsService);
   const authService = inject(AuthService);

@@ -96,7 +96,7 @@ export class UserPollCardComponent {
             },
           });
       },
-      reject: () => {},
+      reject: undefined,
     });
   }
 }

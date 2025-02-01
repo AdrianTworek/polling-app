@@ -9,9 +9,9 @@ import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 
 @Component({
-    selector: 'app-auth',
-    imports: [ReactiveFormsModule, ButtonModule, InputTextModule, PasswordModule],
-    templateUrl: './auth.component.html'
+  selector: 'app-auth',
+  imports: [ReactiveFormsModule, ButtonModule, InputTextModule, PasswordModule],
+  templateUrl: './auth.component.html',
 })
 export class AuthComponent {
   private authService = inject(AuthService);
@@ -51,6 +51,7 @@ export class AuthComponent {
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private authResultHandler(promise: Promise<any>) {
     promise
       .then(() => {

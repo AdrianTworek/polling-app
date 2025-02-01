@@ -92,7 +92,13 @@
           isRegisterMode() ? "Already registered?" : "Don't have an account?"
         }}
       </p>
-      <p class="font-bold cursor-pointer" (click)="onToggleFormMode()">
+      <p
+        class="font-bold cursor-pointer"
+        (click)="onToggleFormMode()"
+        (keydown.enter)="onToggleFormMode()"
+        tabindex="0"
+        role="button"
+      >
         {{ isRegisterMode() ? "Login" : "Register" }}
       </p>
     </div>

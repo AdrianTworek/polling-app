@@ -63,7 +63,7 @@ export class PollVoteComponent {
   poll$ = toObservable(this.pollId).pipe(
     switchMap((id) =>
       this.pollsService.getPollById(id).pipe(
-        catchError((error) => {
+        catchError(() => {
           return of(null);
         }),
         tap((poll) => {

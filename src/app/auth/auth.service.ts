@@ -107,14 +107,14 @@ export class AuthService {
     return signOut(this.auth);
   }
 
-  updateUsername(username: string): Observable<any> {
+  updateUsername(username: string): Observable<void> {
     const promise = updateProfile(this.auth.currentUser!, {
       displayName: username,
     });
     return from(promise);
   }
 
-  deleteAccount(): Observable<any> {
+  deleteAccount(): Observable<void> {
     const promise = deleteUser(this.auth.currentUser!);
     return from(promise);
   }

@@ -2,6 +2,9 @@
   styleClass="h-full flex align-items-center justify-content-center shadow-3"
   class="custom-card"
   (click)="showDialog()"
+  (keydown.enter)="showDialog()"
+  tabindex="0"
+  role="button"
 >
   <div class="flex flex-row align-items-center justify-content-center gap-2">
     <i class="pi pi-plus"></i>
@@ -21,6 +24,9 @@
     <div
       class="col-10 md:col-5 flex md:p-4 mt-4 flex-column align-items-center text-center border-1 custom-card"
       (click)="onRedirectToPollCreator(pollType.Anonymous)"
+      (keydown.enter)="onRedirectToPollCreator(pollType.Anonymous)"
+      tabindex="0"
+      role="button"
     >
       <h3 class="m-0 flex flex-row gap-2 align-items-center">
         <i class="pi pi-lock"></i>Anonymous
@@ -30,6 +36,9 @@
     <div
       class="col-10 md:col-5 flex md:p-4 mt-4 flex-column align-items-center text-center border-1 custom-card"
       (click)="onRedirectToPollCreator(pollType.Public)"
+      (keydown.enter)="onRedirectToPollCreator(pollType.Public)"
+      tabindex="0"
+      role="button"
     >
       <h3 class="m-0 flex flex-row gap-2 align-items-center">
         <i class="pi pi-users"></i>Public

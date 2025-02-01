@@ -15,6 +15,7 @@ const defaultError = 'Something went wrong';
   standalone: true,
 })
 export class ObsWithStatusPipe implements PipeTransform {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   transform<T = any>(val: Observable<T>): Observable<ObsWithStatusResult<T>> {
     return val.pipe(
       map((value: T) => {

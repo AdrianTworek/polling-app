@@ -64,6 +64,7 @@ export class PollDetailsComponent {
 
   getChartData = computed(() => {
     // Enforce rerender of chart when selectedChartType changes
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const chartType = this.selectedChartType();
     const poll = this.pollSig();
 
