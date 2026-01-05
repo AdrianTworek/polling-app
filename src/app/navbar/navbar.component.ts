@@ -8,9 +8,9 @@ import { MenuModule } from 'primeng/menu';
 import { AvatarModule } from 'primeng/avatar';
 
 @Component({
-    selector: 'app-navbar',
-    imports: [ButtonModule, MenuModule, AvatarModule],
-    templateUrl: './navbar.component.html'
+  selector: 'app-navbar',
+  imports: [ButtonModule, MenuModule, AvatarModule],
+  templateUrl: './navbar.component.html',
 })
 export class NavbarComponent implements OnInit {
   private authService = inject(AuthService);

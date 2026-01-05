@@ -5,9 +5,9 @@ import { TabMenuModule } from 'primeng/tabmenu';
 import { MenuItem } from 'primeng/api';
 
 @Component({
-    selector: 'app-dashboard',
-    imports: [RouterModule, TabMenuModule],
-    templateUrl: './dashboard.component.html'
+  selector: 'app-dashboard',
+  imports: [RouterModule, TabMenuModule],
+  templateUrl: './dashboard.component.html',
 })
 export class DashboardComponent implements OnInit {
   items: MenuItem[] | undefined;

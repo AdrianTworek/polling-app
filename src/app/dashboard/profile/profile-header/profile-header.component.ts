@@ -5,9 +5,9 @@ import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
 
 @Component({
-    selector: 'app-profile-header',
-    imports: [AvatarModule, AvatarGroupModule],
-    templateUrl: './profile-header.component.html'
+  selector: 'app-profile-header',
+  imports: [AvatarModule, AvatarGroupModule],
+  templateUrl: './profile-header.component.html',
 })
 export class ProfileHeaderComponent {
   private authService = inject(AuthService);
